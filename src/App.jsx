@@ -1,121 +1,59 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import React, { useState } from 'react';
+import { PROFILE_DATA } from './constants';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [darkMode, setDarkMode] = useState(true);
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
+    <div className={darkMode ? "dark" : ""}>
+      <div className="min-h-screen bg-white dark:bg-darkBg text-slate-900 dark:text-white transition-colors duration-300">
+        
+        {/* Navigation */}
+        <nav className="p-6 flex justify-between items-center max-w-6xl mx-auto">
+          <h1 className="font-bold text-xl tracking-tighter">PAM.dev</h1>
+          <button 
+            onClick={() => setDarkMode(!darkMode)}
+            className="p-2 rounded-full bg-slate-200 dark:bg-slate-800"
+          >
+            {darkMode ? '☀️' : '🌙'}
+          </button>
+        </nav>
+
+        {/* Hero Section */}
+        <main className="max-w-4xl mx-auto mt-20 px-6 text-center">
+          <p className="text-brand font-mono mb-4 text-sm">Hi, my name is</p>
+          <h2 className="text-5xl md:text-7xl font-bold mb-6 tracking-tight">
+            {PROFILE_DATA.name}.
+          </h2>
+          <h3 className="text-3xl md:text-5xl font-semibold text-slate-500 dark:text-slate-400 mb-8">
+            I build robust systems for the web.
+          </h3>
+          <p className="max-w-xl mx-auto text-lg text-slate-600 dark:text-slate-400 mb-10">
+            I'm a {PROFILE_DATA.role} specializing in backend architecture, 
+            cryptography, and scalable applications. Currently focused on building 
+            enterprise-level solutions.
           </p>
-        </div>
-        <button
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+          
+          <div className="flex gap-4 justify-center">
+            <a 
+              href={PROFILE_DATA.resumeUrl} 
+              download
+              className="px-8 py-3 bg-brand text-white rounded-lg font-medium hover:bg-blue-600 transition"
+            >
+              Download Resume
+            </a>
+            <button className="px-8 py-3 border border-slate-300 dark:border-slate-700 rounded-lg font-medium hover:bg-slate-50 dark:hover:bg-slate-800 transition">
+              View Projects
+            </button>
+          </div>
+        </main>
 
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+        <footer className="mt-20 py-10 text-center text-sm text-slate-500">
+          © {PROFILE_DATA.copyrightYear} {PROFILE_DATA.name} | Built with React & Tailwind
+        </footer>
+      </div>
+    </div>
+  );
 }
 
-export default App
+export default App;
